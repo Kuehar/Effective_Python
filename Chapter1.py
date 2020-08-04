@@ -19,3 +19,31 @@ def to_bytes(bytes_or_str):
         value = bytes_or_str
     return value
 
+# Insted of writing complicated code, using a helper method.
+
+from urllib.parse import parse_qs
+
+my_values = parse_qs('red=5&blue=0&green=',keep_blank_values=True)
+print(repr(my_values))
+# >>> {'red':['5'],'green':[''],'blue':['0']}
+
+print('Red:     ',my_values.get('red'))
+print('Green:     ',my_values.get('green'))
+print('Opacity:     ',my_values.get('opacity'))
+
+# Red:      ['5']
+# Green:    ['']
+# Opacity:  None
+
+# applying below code to my_values,('red=5&blue=0&green=')....
+
+red = my_values.get('red',[''])[0] or 0
+green = my_values.get('green',[''])[0] or 0
+opacity = my_values.get('opacity',[''])[0] or 0
+print('Red':   %r' % red')
+print('Green':   %r' % green')
+print('Opacity':   %r' % opacity')
+
+# Red:    '5'
+# Green:   0
+# Opacity: 0
